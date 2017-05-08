@@ -20,10 +20,15 @@
    SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
-void getTime(byte *buf, unsigned long ntpEpoch)
+time_t applyTimeZone(time_t systemTime)
 {
-  buf[0] = (ntpEpoch  % 86400UL) / 3600UL; // hours
-  buf[1] = (ntpEpoch % 3600UL) / 60UL; // minutes
-  buf[2] = ntpEpoch % 60UL; // seconds
+  if (timeZone > 0)
+  {
+    return systemTime + (time_t) timeZone;
+  }
+  if (timeZone < 0)
+  {
+    return systemTime - ((time_t) abs(timeZone));
+  }
 }
 

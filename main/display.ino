@@ -22,6 +22,8 @@
 
 Adafruit_FeatherOLED_WiFi oled = Adafruit_FeatherOLED_WiFi();
 
+char displayTime[] = {' ', '0', '0', ':', '0', '0', ' '};
+
 void setupDisplay()
 {
   oled.init();
@@ -43,7 +45,7 @@ void setupDisplay()
   oled.clearMsgArea();
 
   oled.setTextSize(3);
-  oled.println("LOADING");
+  oled.print("LOADING");
   oled.setTextSize(1);
 
   oled.display();
@@ -62,24 +64,24 @@ void updateBattery(float voltage)
 
 void updateTime()
 {
+  prepareTime();
   oled.setTextSize(3);
   oled.clearMsgArea();
-  oled.print(" ");
-  byte hours = (byte) hour() + timeZone;
-  if (hours < (byte) 10)
-  {
-    oled.print("0");
-  }
-  oled.print(hours);
-  oled.print(":");
-  byte minutes = minute();
-  if (minutes < (byte) 10)
-  {
-    oled.print("0");
-  }
-  oled.println(minutes);
-  oled.setTextSize(1);
+  oled.print(displayTime);
   oled.display();
+  oled.setTextSize(1);
+}
+
+void prepareTime()
+{
+  byte hours = (byte) hour();
+  byte minutes = (byte) minute();
+
+  displayTime[1] = (hours / (byte) 10) + '0';
+  displayTime[2] = (hours % (byte) 10) + '0';
+
+  displayTime[4] = (minutes / (byte) 10) + '0';
+  displayTime[5] = (minutes % (byte) 10) + '0';
 }
 
 void refreshDisplay()

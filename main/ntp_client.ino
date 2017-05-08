@@ -43,10 +43,11 @@ boolean receiveResponse(byte *buf)
     WiFiUdp.read(buf, NTP_DATAGRAM_SIZE);
 
     unsigned long ntpEpoch = getNtpEpoch(buf);
-    getTime(timeBuf, ntpEpoch);
+    time_t unixEpoch = (time_t) (ntpEpoch - UNIX_EPOCH_OFFSET);
+    unixEpoch = applyTimeZone(unixEpoch);
 
     // set the controller system time
-    setTime((time_t) (ntpEpoch - UNIX_EPOCH_OFFSET));
+    setTime(unixEpoch);
 
     printTime(ntpEpoch);
   }

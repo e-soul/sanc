@@ -29,7 +29,6 @@
 const time_t NTP_REQUEST_PERIOD = (time_t) 3600;
 
 const int NTP_DATAGRAM_SIZE = 48;
-const int TIME_BUF_SIZE = 3;
 
 // time between 01.01.1900 and 01.01.1970, see https://tools.ietf.org/html/rfc868
 const unsigned long UNIX_EPOCH_OFFSET = 2208988800UL;
@@ -37,15 +36,13 @@ const unsigned long UNIX_EPOCH_OFFSET = 2208988800UL;
 const char *ssid = "YOUR_SSID";
 const char *pass = "YOUR_PASSPHRASE";
 
-const byte timeZone = +3;
+const long timeZone = +10800L;
 
 const unsigned int localUdpPort = 2390;
 
 const char *ntpServer = "time.google.com";
 
 byte ntpPacketBuf[NTP_DATAGRAM_SIZE] = {0};
-
-byte timeBuf[TIME_BUF_SIZE] = {0};
 
 time_t timeSinceLastNtpRequest = (time_t) NTP_REQUEST_PERIOD * -2 ;
 

@@ -75,13 +75,6 @@ void printTime(unsigned long ntpEpoch)
   Serial.print("NTP epoch " );
   Serial.println(ntpEpoch);
 
-  Serial.print("NTP time ");
-  Serial.print(timeBuf[0]);
-  Serial.print(":");
-  Serial.print(timeBuf[1]);
-  Serial.print(":");
-  Serial.println(timeBuf[2]);
-
   Serial.print("controller system time and date: ");
   Serial.print(hour());
   Serial.print(":");
