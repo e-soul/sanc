@@ -26,7 +26,7 @@
 
 #include <Adafruit_FeatherOLED_WiFi.h>
 
-const time_t NTP_REQUEST_PERIOD = (time_t) 3600;
+const time_t NTP_REQUEST_PERIOD = (time_t) 43200; // 12 hours
 
 const int NTP_DATAGRAM_SIZE = 48;
 
@@ -69,7 +69,8 @@ void loop()
 
   updateTime();
 
-  delay(10000);
+  unsigned long delayTime = (60UL - (unsigned long) second()) * 1000UL;
+  delay(delayTime);
 }
 
 void requestInternetTime()
