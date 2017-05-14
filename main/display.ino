@@ -27,7 +27,7 @@ char displayTime[] = {' ', '0', '0', ':', '0', '0', ' '};
 void setupDisplay()
 {
   oled.init();
-  oled.clearDisplay();
+  oled.dim(true);
 
   oled.setBatteryIcon(true);
   oled.setBatteryVisible(true);
